@@ -1,0 +1,17 @@
+import { Swipe, SwipeItem,Progress,Button,Field,Picker} from 'mint-ui';
+import { Popup } from 'mint-ui';
+import { Cell } from 'mint-ui';
+import { Checklist } from 'mint-ui';
+import { DatetimePicker } from 'mint-ui';
+import { Search } from 'mint-ui';
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Progress.name, Progress);
+Vue.component(Button.name, Button);
+Vue.component(Field.name, Field);
+Vue.component(Picker.name, Picker);
+Vue.component(Popup.name, Popup);
+Vue.component(Cell.name, Cell);
+Vue.component(Checklist.name, Checklist);
+Vue.component(DatetimePicker.name, DatetimePicker);
+Vue.component(Search.name, Search);

@@ -27,7 +27,6 @@ import { Cell } from 'mint-ui';
 import { Checklist } from 'mint-ui';
 import { DatetimePicker } from 'mint-ui';
 import { Search } from 'mint-ui';
-import { Toast } from 'mint-ui';
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Progress.name, Progress);

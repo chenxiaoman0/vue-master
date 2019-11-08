@@ -63,7 +63,7 @@ import Back from "components/common/back/Back";
 
 import Separator from "components/content/separator/Separator";
 import SelectWeight from "./childCom/SelectWeight";
-import SelectDate from "./childCom/SelectDate";
+import SelectDate from "components/content/selectdate/SelectDate";
 
 import { isPhoneNo } from "common/utils";
 import { MessageBox, Toast } from "mint-ui";
@@ -137,7 +137,7 @@ export default {
       }
       //验证手机号
       if (!isPhoneNo(this.phone)) {
-          MessageBox({
+        MessageBox({
           title: "提示",
           message: "手机号输入不正确",
           showCancelButton: true
@@ -152,25 +152,25 @@ export default {
       DonationInfo.decoration = this.decoration;
       DonationInfo.weight = this.weight;
       DonationInfo.datatime = this.datatime;
-      DonationInfo.addtime =Math.round(new Date()/1000);
+      DonationInfo.addtime = Math.round(new Date() / 1000);
       DonationInfo.complete = false;
       console.log(DonationInfo);
-      console.log('--');
+      console.log("--");
       addDonateInfo(DonationInfo).then(res => {
-       if(res==1){
-        MessageBox({
-            title: '预约成功',
+        if (res == 1) {
+          MessageBox({
+            title: "预约成功",
             message: "感谢您对公益的支持！",
             showCancelButton: true
-            });
-            this.username = "";
-            this.phone = "";
-            this.address = "";
-            this.good = "";
-            this.decoration = "";
-            this.weight = "";
-            this.datatime = "";
-       }
+          });
+          this.username = "";
+          this.phone = "";
+          this.address = "";
+          this.good = "";
+          this.decoration = "";
+          this.weight = "";
+          this.datatime = "";
+        }
       });
     }
   }

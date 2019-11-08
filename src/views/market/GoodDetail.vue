@@ -1,22 +1,24 @@
 <template>
   <div class="good-detail">
     <nav-bar class="nav-bar">
-     <back slot="navBarLeft" @click.native="backTo"></back>
+      <back slot="navBarLeft" @click.native="backTo"></back>
       <div slot="navBarcenter">商品详情</div>
     </nav-bar>
     <scroll class="scroll" ref="scroll">
       <div class="good-img">
-        <img 
-        v-if="goodsData.imgpath"
-        :src="goodsData.imgpath[0]" 
-        alt="" class="" />
+        <img
+          v-if="goodsData.imgpath"
+          :src="goodsData.imgpath[0]"
+          alt=""
+          class=""
+        />
       </div>
       <div class="good-info">
         <h5>{{ goodsData.title }}</h5>
         <p class="good-text">{{ goodsData.dec }}</p>
         <div class="good-info-dec">
-          <span>{{ goodsData.degree }}成新</span>
-          <span>{{ getName(goodsData.c_name)}}</span>
+          <span @click="ToBuy">{{ goodsData.degree }}成新</span>
+          <span>{{ getName(goodsData.c_name) }}</span>
         </div>
         <p class="price">
           <span>￥{{ goodsData.price }}</span>
@@ -52,7 +54,7 @@ import Separator from "components/content/separator/Separator";
 import DetailBottomBar from "./childComs/DetailBottomBar";
 
 import { backToMixin } from "common/mixin";
-
+import { MessageBox, Toast } from "mint-ui";
 //引入请求数据方法
 import { getDetail } from "network/market";
 export default {
@@ -78,6 +80,7 @@ export default {
   },
   created() {
     getDetail(this.$route.query.id).then(res => {
+      console.log(res);
       this.goodsData = res;
       console.log(this.goodsData.imgpath[0]);
     });
@@ -86,8 +89,8 @@ export default {
     imgload() {
       this.$refs.scroll.refresh();
     },
-    backTo(){
-        this.$router.back();
+    backTo() {
+      this.$router.back();
     },
     getName(name) {
       switch (name) {
@@ -104,8 +107,17 @@ export default {
           return "其它";
           break;
       }
+    },
+    ToBuy() {
+      MessageBox.confirm("购买成功后将有工作人员送货上门，确定购买?").then(
+        action => {
+          this.$router.push({
+            path: "/buy"
+          });
+        }
+      );
     }
-  },
+  }
 };
 </script>
 <style scoped>

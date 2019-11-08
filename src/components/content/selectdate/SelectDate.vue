@@ -27,7 +27,7 @@
             <div class="usi-btn-cancel" @click="popupVisible = !popupVisible">
               取消
             </div>
-            <div class="">请选择志愿者上门回收时间</div>
+            <div class="">请选择志愿者上门时间</div>
             <div class="usi-btn-sure" @click="determine">
               确定
             </div>

@@ -11,7 +11,7 @@
                 <div class="card-text">
                     <h5>{{card.title}}</h5>
                     <p>
-                        <span v-html="card.content"></span>
+                        <span v-html="card.editorValue"></span>
                     </p>
                 </div>
                 <mt-button  class="intobtn">进入</mt-button> 

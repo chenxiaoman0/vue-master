@@ -22,7 +22,8 @@ const MyAppointment = () => import("views/personal/MyAppointment");
 const MyIntegral = () => import("views/personal/MyIntegral");
 const GoodDetail = () => import("views/market/GoodDetail");
 const CheckIn = () => import("views/checkin/CheckIn");
-
+const MyOrder = () => import("views/personal/MyOrder");
+const Buy = () => import("views/market/Buy");
 import { getCookie } from "@/common/utils.js";
 let router = new Router({
     mode: "history",
@@ -153,7 +154,21 @@ let router = new Router({
       meta: {
         isLogin: true
       }
-    }
+    },
+    {
+        path: "/myorder",
+        component: MyOrder,
+        meta: {
+          isLogin: true
+        }
+      },
+      {
+        path: "/buy",
+        component: Buy,
+        meta: {
+          isLogin: true
+        }
+      }
   ]
 });
 //全局导航守卫

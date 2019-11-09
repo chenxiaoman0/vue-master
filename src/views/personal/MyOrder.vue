@@ -10,12 +10,12 @@
       @getTabControlIndex="itemClick"
     ></tab-control>
     <scroll class="scroll" ref="scroll">
-      <!-- <appointment-item
-        v-for="(donationInfo, index) in infos[currentTabType]"
-        :key="index"
-        :info="donationInfo"
+      <appointment-item
+        v-for="item in infos[currentTabType]"
+        :key="item.id"
+        :info="item"
         :state="currentTabType"
-      ></appointment-item> -->
+      ></appointment-item>
     </scroll>
   </div>
 </template>
@@ -38,13 +38,16 @@ export default {
   },
   data() {
     return {
-      currentTabType: "incomplete"
+      currentTabType: "incomplete",
+      orderList: []
     };
   },
   created() {
-    getOrderList(res=>{
-        console.log(res);
-    })
+    this.$nextTick(() => {
+      getOrderList(1).then(res => {
+        this.orderList = res;
+      });
+    });
   },
   activated() {
     this.$refs.scroll.refresh();
@@ -71,11 +74,11 @@ export default {
   computed: {
     infos() {
       const infos = { complete: [], incomplete: [] };
-      this.$store.state.donationInfos.forEach(item => {
-        if (item.complete) {
-          infos.complete.push(item);
-        } else {
+      this.orderList.forEach(item => {
+        if (item.complete==0) {
           infos.incomplete.push(item);
+        } else {
+          infos.complete.push(item);
         }
       });
       return infos;

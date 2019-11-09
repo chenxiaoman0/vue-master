@@ -18,14 +18,14 @@ export function getDetail(id){
     })
 }
 //购买商品
-export function buy(){
-    const data={
-        username:username,
-        password:address,
-        phone:phone,
-        dec:dec,
-        u_id:1
-    }
+export function buy(data){
+    // const data={
+    //     username:username,
+    //     password:address,
+    //     phone:phone,
+    //     dec:dec,
+    //     u_id:1
+    // }
     return request({
         method:'POST',
         url:'goods/buy',
@@ -38,7 +38,7 @@ export function getOrderList(id){
     return request({
         url:'goods/orderList',
         params:{
-          u_id:1
+          u_id:id
         }
     })
 }

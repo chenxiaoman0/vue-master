@@ -15,7 +15,7 @@
           </span>
         </div>
         <div class="progress"></div>
-        <div class="detail-content" v-html="detail.content"></div>
+        <div class="detail-content" v-html="detail.editorValue"></div>
       </div>
     </scroll>
     <dynamic-tabbar></dynamic-tabbar>

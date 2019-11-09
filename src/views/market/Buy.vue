@@ -60,13 +60,18 @@ export default {
   },
   data() {
     return {
+      g_id: "",
+      u_id: 1,
       username: "",
       phone: "",
       address: "",
       decoration: "",
       active: "",
-      datatime: ""
+      datetime: ""
     };
+  },
+  created() {
+    this.g_id = this.$route.query.id;
   },
   methods: {
     //点击返回上一页面
@@ -76,15 +81,30 @@ export default {
     //点击提交
     handleClick() {
       var data = {};
+      data. g_id = this. g_id;
+      data.u_id = this.u_id;
       data.username = this.username;
       data.phone = this.phone;
       data.address = this.address;
       data.decoration = this.decoration;
-      data.datatime = this.datatime;
-      console.log(data);
+      data.datetime = this.datetime;
+      buy(data).then((res)=>{
+          if (res == 1) {
+          MessageBox({
+            title: "购买成功",
+            message: "感谢您对公益的支持！",
+            showCancelButton: true
+          });
+          this.username = "";
+          this.phone = "";
+          this.address = "";
+          this.decoration = "";
+          this.datatime = "";
+        }
+      })
     },
-    selectdate(datatime) {
-      this.datatime = datatime;
+    selectdate(datetime) {
+      this.datetime = datetime;
     }
   }
 };

@@ -156,7 +156,7 @@ let router = new Router({
       }
     },
     {
-        path: "/myorder",
+        path: "/myOrder",
         component: MyOrder,
         meta: {
           isLogin: true

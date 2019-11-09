@@ -21,7 +21,7 @@
             <mt-cell 
            title="我的订单" 
            class="row"
-           to="/myAppointment"
+           to="/myOrder"
            >
             <span>></span>
             <img slot="icon" src="~assets/img/common/icon/dingdan.svg" width="24" height="24">

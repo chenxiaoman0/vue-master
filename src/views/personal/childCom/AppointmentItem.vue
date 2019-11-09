@@ -3,7 +3,7 @@
     <p>下单时间{{ addtime }}</p>
     <div class="appointment-content">
       <div class="row">
-        <h5>{{ info.good }}</h5>
+        <h5>{{ info.good||info.title }}</h5>
         <mt-button 
         v-if="info.complete==0"
         type="primary" 
@@ -28,7 +28,7 @@
       </div>
       <div class="row">
         <h5>服务时间</h5>
-        <span>{{ info.datatime }}</span>
+        <span>{{ info.datetime }}</span>
       </div>
       <div class="appointment-dec">
         {{ info.decoration }}
@@ -53,7 +53,8 @@ export default {
   },
   computed: {
     addtime() {
-      const date = new Date(this.info.addtime);
+    var phptime=this.info.addtime || this.info.orderaddtime
+      const date = new Date(parseInt(phptime)*1000);
       return formatDate(date, "yyyy-MM-dd hh:mm");
     }
   }

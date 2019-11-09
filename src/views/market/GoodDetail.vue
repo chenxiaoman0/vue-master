@@ -17,7 +17,7 @@
         <h5>{{ goodsData.title }}</h5>
         <p class="good-text">{{ goodsData.dec }}</p>
         <div class="good-info-dec">
-          <span @click="ToBuy">{{ goodsData.degree }}成新</span>
+          <span>{{ goodsData.degree }}成新</span>
           <span>{{ getName(goodsData.c_name) }}</span>
         </div>
         <p class="price">
@@ -40,7 +40,7 @@
         />
       </div>
     </scroll>
-    <detail-bottom-bar></detail-bottom-bar>
+    <detail-bottom-bar @ToBuy="ToBuy"></detail-bottom-bar>
   </div>
 </template>
 
@@ -54,7 +54,7 @@ import Separator from "components/content/separator/Separator";
 import DetailBottomBar from "./childComs/DetailBottomBar";
 
 import { backToMixin } from "common/mixin";
-import { MessageBox, Toast } from "mint-ui";
+
 //引入请求数据方法
 import { getDetail } from "network/market";
 export default {
@@ -80,9 +80,7 @@ export default {
   },
   created() {
     getDetail(this.$route.query.id).then(res => {
-      console.log(res);
-      this.goodsData = res;
-      console.log(this.goodsData.imgpath[0]);
+     this.goodsData=res
     });
   },
   methods: {
@@ -108,14 +106,12 @@ export default {
           break;
       }
     },
-    ToBuy() {
-      MessageBox.confirm("购买成功后将有工作人员送货上门，确定购买?").then(
-        action => {
-          this.$router.push({
-            path: "/buy"
-          });
-        }
-      );
+    ToBuy(){
+        console.log(this.goodsData.c_id);
+        this.$router.push({
+            path:'/buy',
+            query: { id:this.goodsData.c_id }
+        })
     }
   }
 };

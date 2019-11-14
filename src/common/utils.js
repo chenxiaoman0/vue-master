@@ -1,25 +1,37 @@
 //工具类
-export function formatDate(date, fmt) {
-    if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
-    }
-    let o = {
-        'M+': date.getMonth() + 1,
-        'd+': date.getDate(),
-        'h+': date.getHours(),
-        'm+': date.getMinutes(),
-        's+': date.getSeconds()
+export function formatDate(date, fmt)
+{
+    date = date == undefined ? new Date() : date;
+    date = typeof date == 'number' ? new Date(date) : date;
+    fmt = fmt || 'yyyy-MM-dd HH:mm:ss';
+    var obj =
+    {
+        'y': date.getFullYear(), // 年份，注意必须用getFullYear
+        'M': date.getMonth() + 1, // 月份，注意是从0-11
+        'd': date.getDate(), // 日期
+        'q': Math.floor((date.getMonth() + 3) / 3), // 季度
+        'w': date.getDay(), // 星期，注意是0-6
+        'H': date.getHours(), // 24小时制
+        'h': date.getHours() % 12 == 0 ? 12 : date.getHours() % 12, // 12小时制
+        'm': date.getMinutes(), // 分钟
+        's': date.getSeconds(), // 秒
+        'S': date.getMilliseconds() // 毫秒
     };
-    for (let k in o) {
-        if (new RegExp(`(${k})`).test(fmt)) {
-            let str = o[k] + '';
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : padLeftZero(str));
-        }
+    var week = ['天', '一', '二', '三', '四', '五', '六'];
+    for(var i in obj)
+    {
+        fmt = fmt.replace(new RegExp(i+'+', 'g'), function(m)
+        {
+            var val = obj[i] + '';
+            if(i == 'w') return (m.length > 2 ? '星期' : '周') + week[val];
+            for(var j = 0, len = val.length; j < m.length - len; j++) val = '0' + val;
+            return m.length == 1 ? val : val.substring(val.length - m.length);
+        });
     }
     return fmt;
-};
+}
 //格式化
-function padLeftZero(str) {
+export function padLeftZero(str) {
     return ('00' + str).substr(str.length);
 }
 //手机号验证

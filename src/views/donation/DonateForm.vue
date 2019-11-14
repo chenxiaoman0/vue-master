@@ -31,13 +31,30 @@
       <div class="classification">
         <h5 class="from-title">物品类型</h5>
         <div class="checklist">
-          <div
-            v-for="(item, index) in classification"
-            :key="index"
-            @click="checked(index, $event)"
-          >
-            <img src="" alt="" />
-            <span>{{ item }}</span>
+          <div>
+            <input type="checkbox" id="yifu" value="衣服" v-model="goods" />
+            <label for="yifu">衣服</label>
+          </div>
+          <div>
+            <input type="checkbox" id="shuji" v-model="goods" value="书籍" />
+            <label for="shuji">书籍</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="riyongpin"
+              value="日用品"
+              v-model="goods"
+            />
+             <label for="riyongpin">日用品</label>
+          </div>
+          <div>
+            <input type="checkbox" id="tiyu" value="体育器材" v-model="goods" />
+            <label for="tiyu">体育器材</label>
+          </div>
+          <div>
+            <input type="checkbox" id="otner" value="其它" v-model="goods" />
+            <label for="otner">其它</label>
           </div>
         </div>
       </div>
@@ -85,35 +102,24 @@ export default {
       phone: "",
       address: "",
       decoration: "",
-      good: ["衣服"],
       weight: "",
       datatime: "",
       active: "",
-      classification: ["衣服", "书籍", "日用品", "体育器材", "其它"]
+      goods: []
     };
+  },
+  watch: {
+    checklist(val, oldval) {
+      this.goods = val;
+    }
   },
   methods: {
     //点击返回上一页面
     backTo() {
       this.$router.back();
     },
-    checked(i, $event) {
-      this.active = i;
-      switch (i) {
-        case 0: {
-          $event.target.src = this.imgactivepath;
-          this.good.push("衣服");
-          break;
-        }
-        case 1: {
-          this.good.push("衣服");
-          break;
-        }
-      }
-      $event.target.src = this.imgactivepath;
-    },
-    selectdate(datatime) {
-      this.datatime = datatime;
+    selectdate(datetime) {
+      this.datetime = datetime;
     },
     selectweight(weight) {
       this.weight = weight;
@@ -124,9 +130,9 @@ export default {
         !this.username ||
         !this.phone ||
         !this.address ||
-        !this.good ||
+        !this.goods ||
         !this.weight ||
-        !this.datatime
+        !this.datetime
       ) {
         MessageBox({
           title: "提示",
@@ -148,14 +154,12 @@ export default {
       DonationInfo.username = this.username;
       DonationInfo.phone = this.phone;
       DonationInfo.address = this.address;
-      DonationInfo.good = this.good.join(",");
+      DonationInfo.goods = this.goods.join(",");
       DonationInfo.decoration = this.decoration;
       DonationInfo.weight = this.weight;
-      DonationInfo.datatime = this.datatime;
+      DonationInfo.datetime = this.datetime;
       DonationInfo.addtime = Math.round(new Date() / 1000);
       DonationInfo.complete = false;
-      console.log(DonationInfo);
-      console.log("--");
       addDonateInfo(DonationInfo).then(res => {
         if (res == 1) {
           MessageBox({
@@ -169,7 +173,13 @@ export default {
           this.good = "";
           this.decoration = "";
           this.weight = "";
-          this.datatime = "";
+          this.datetime = "";
+        }else{
+             MessageBox({
+            title: "预约失败",
+            message: "请重新提交",
+            showCancelButton: true
+          });
         }
       });
     }

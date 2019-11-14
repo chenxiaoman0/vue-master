@@ -43,14 +43,18 @@ export default {
     };
   },
   created() {
+ getOrderList(1).then(res => {
     this.$nextTick(() => {
-      getOrderList(1).then(res => {
         this.orderList = res;
+        this.$refs.scroll.refresh();
       });
     });
   },
-  activated() {
+  mounted() {
     this.$refs.scroll.refresh();
+  },
+  activated() {
+    // this.$refs.scroll.refresh();
   },
   methods: {
     backTo() {
@@ -67,7 +71,6 @@ export default {
           break;
         }
       }
-      //bug
       this.$refs.scroll.refresh();
     }
   },
@@ -75,7 +78,7 @@ export default {
     infos() {
       const infos = { complete: [], incomplete: [] };
       this.orderList.forEach(item => {
-        if (item.complete==0) {
+        if (item.complete == 0) {
           infos.incomplete.push(item);
         } else {
           infos.complete.push(item);

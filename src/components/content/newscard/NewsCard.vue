@@ -42,7 +42,6 @@ export default {
             })
         },
         imgload(){
-            console.log('--');
             this.$bus.$emit('imgload');
         }
     }

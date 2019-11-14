@@ -12,7 +12,7 @@
         size="small"
         :class="{active:isActive?true:''}"
         @click.native="To"
-        >去注册</mt-button>
+        >{{cellData.toName}}</mt-button>
         </div>
     </div>
 </template>

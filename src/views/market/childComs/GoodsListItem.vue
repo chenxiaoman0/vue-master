@@ -34,7 +34,6 @@ export default {
       }
   },
   created(){
-      console.log(this.goodsitem.c_name)
       this.getName(this.goodsitem.c_name)
   },
   methods: {

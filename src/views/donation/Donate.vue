@@ -6,7 +6,6 @@
        </nav-bar>
        <donate-swiper class="donate-swiper"
        :donateData="donateData">
-            <!-- <donate-card slot="donateCard"></donate-card> -->
        </donate-swiper>
     </div>
 </template>

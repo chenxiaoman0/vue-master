@@ -80,7 +80,7 @@ export default {
   },
   created() {
     getDetail(this.$route.query.id).then(res => {
-     this.goodsData=res
+     this.goodsData=res;
     });
   },
   methods: {

@@ -73,8 +73,8 @@ export default {
     this.getGoodsData('equipment');
     this.getGoodsData('other');
     },
-    actived(){
-        this.$ref.scroll.refresh();
+    activated(){
+        // this.$ref.scroll.refresh();
     },
     mounted(){
     //事件总线加防抖技术
@@ -104,11 +104,11 @@ export default {
                 }  
             }
           this.getGoodsData(this.currentTabType);
+          this.$refs.scroll.refresh();
         },
         getGoodsData(type){
            const page=this.goods[type].page+1;
             getGoodsData(type,page).then(res=>{
-                console.log(res);
                 this.goods[type].list.push(...res.data);
                 this.goods[page]+=1;
             })

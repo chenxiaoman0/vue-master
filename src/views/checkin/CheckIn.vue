@@ -49,11 +49,11 @@ export default {
     data(){
         return{
             cellsData:[
-                {title:'新用户注册',num:50,toPath:''},
-                {title:'每日首次登录',num:10,toPath:''},
-                {title:'捐赠物资',num:50,toPath:''},
-                {title:'购买商品',num:80,toPath:''},
-                {title:'浏览文章',num:2,toPath:''}
+                {title:'新用户注册',num:50,toName:'已注册',toPath:''},
+                {title:'每日首次登录',num:10,toName:'已登录',toPath:''},
+                {title:'捐赠物资',num:50,toName:'去捐赠',toPath:''},
+                {title:'购买商品',num:80,toName:'去购买',toPath:''},
+                {title:'浏览文章',num:2,toName:'去浏览',toPath:''}
             ]
         }
     },

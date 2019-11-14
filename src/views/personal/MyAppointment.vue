@@ -45,8 +45,9 @@ export default {
         this.$store.dispatch("showDonation");
     });
   },
-//   mounted() {
-//   },
+  mounted() {
+      this.$refs.scroll.refresh(); 
+  },
   activated() {
     this.$refs.scroll.refresh();
   },
@@ -65,8 +66,7 @@ export default {
           break;
         }
       }
-      //bug
-      this.$refs.scroll.refresh();
+    this.$refs.scroll.refresh();
     }
   },
   computed: {

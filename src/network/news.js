@@ -11,13 +11,9 @@ export function getNewsData(type,page){
     })
 }
 //获取最新几条的分类数据
-export function getNewestData(type,limit){
+export function getNewestData(){
     return request({
-        url:'news/getNewest',
-        params:{
-            type,
-            limit
-        }
+        url:'news/getNewest'
     })
 }
 export function getNewsDetail(id){

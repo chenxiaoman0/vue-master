@@ -22,7 +22,7 @@
         <img src="~assets/img/home/banner.png" alt="" />
       </div>
       <home-dynamic :dynamic="dynamic"></home-dynamic>
-      <home-review></home-review>
+      <home-review :newsest="newsest"></home-review>
     </Scroll>
   </div>
 </template>
@@ -37,7 +37,7 @@ import Separator from "components/content/separator/Separator";
 import HomeReview from "./childCom/HomeReview";
 import HomeDynamic from "./childCom/HomeDynamic";
 
-import { getNewestData } from "network/news";
+import { getNewsData } from "network/news";
 
 //引入防抖
 import { debounce } from "common/utils";
@@ -80,13 +80,16 @@ export default {
         { img: require("assets/img/home/slide2.jpeg") },
         { img: require("assets/img/home/slide3.jpeg") }
       ],
-      dynamic: []
+      dynamic: [],
+      newsest:[]
     };
   },
   created() {
-    getNewestData("donation", 4).then(res => {
+    getNewsData("donation", 1).then(res => {
       this.dynamic = res;
-      this.$nextTick();
+    });
+     getNewsData("newest", 1).then(res => {
+      this.newsest = res;
     });
   },
   mounted() {

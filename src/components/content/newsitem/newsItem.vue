@@ -2,14 +2,18 @@
     <div class="ActivityItem" @click="Todetail">
         <div class="item-wrap">
           <div class="left item-img">
-              <img src="~assets/img/home/old.jpg" alt="">
+              <img 
+              src="~assets/img/home/old.jpg"
+               alt=""
+               @load="imgLoad"
+               >
           </div>
           <div class="right item-main">
               <h5 class="title" v-text="activityContent.title"></h5>
               <div class="bottom">
                 <div class="datetime left">
                     <img src="~assets/img/activity/shijian.svg" alt="">
-                    <span>{{activityContent.addtime}}</span>
+                    <span>{{addtime}}</span>
                 </div>
                 <slot name="right">
                     <div class="pageview right">
@@ -23,7 +27,7 @@
     </div>    
 </template>
 <script>
-import formatDate from 'common/utils'
+import {formatDate} from 'common/utils'
 export default {
    data(){
        return {
@@ -38,14 +42,23 @@ export default {
            }
        }
    },
+   computed:{
+        addtime(){
+         var time=this.activityContent.addtime*1000;
+         return formatDate(time,'yyyy-MM-dd')
+        }
+   },
    methods:{
        Todetail(){
            this.$router.push({
                path:'/dynamicDetail',
                query: { id:this.activityContent.id }
            })
+       },
+       imgLoad(){
+           this.$bus.$emit('imgLoad')
        }
-   },
+   }
 }
 </script>
 <style scoped>

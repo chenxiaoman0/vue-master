@@ -112,8 +112,7 @@ export default {
     }
   },
   created() {
-    // this.getAllNewData();
-    this.getNewestData('donation',5);
+    this.getNewsData("newest",1);
     this.getNewsData("review", 1);
     this.getNewsData("knowledge", 1);
     this.getNewsData("recommend", 1);
@@ -145,7 +144,6 @@ export default {
           this.currentTabType = "recommend";
           break;
         }
-         this.$refs.scroll.refresh();
       }
       this.$refs.tabcontrol1.currentIndex = i;
       this.$refs.tabcontrol2.currentIndex = i;
@@ -155,7 +153,6 @@ export default {
     getNewsData(type) {
       const page = this.activityData[type].page + 1;
       getNewsData(type, page).then(res => {
-          console.log(res);
         this.activityData[type].content.list.push(...res);
         this.activityData[type].page += 1;
           this.$refs.scroll.refresh()

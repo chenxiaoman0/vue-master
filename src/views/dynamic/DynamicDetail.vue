@@ -46,20 +46,20 @@ export default {
   },
   created() {
     getNewsDetail(this.$route.query.id).then(res => {
-    this.detail = res;
-    });
-    this.$nextTick(()=> {
-       this.$refs.scroll.refresh();
+      this.detail = res;
+      this.$nextTick(() => {
+        this.$refs.scroll.refresh();
+      });
     });
   },
-  mounted(){
-      this.$refs.scroll.refresh();
+  mounted() {
+    this.$refs.scroll.refresh();
   },
   methods: {
     //点击返回上一页面
     backTo() {
       this.$router.back();
-    },
+    }
   }
 };
 </script>
